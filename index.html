@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <title>Memory game</title>
+</head>
+<body>
+    <div class="control-btn"><span class="btn">Start game</span></div>
+<div class="info-container">
+    <div class="name">
+        Hello : <span></span>
+    </div>
+    <div id="js-timer">
+        <div id="timer">
+            🕓99🕓
+        </div>
+    </div>
+    <div class="tries">
+        Wrong tries : <span>0</span> of 10
+    </div>
+</div>
+<div class="memory-game-blocks">
+    <div class="game-block" data-animale="lion">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/lion.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="lion">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/lion.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="zibra">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/zibra.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="zibra">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/zibra.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="monecy">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/monecy.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="monecy">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/monecy.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="tigher">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/tigher.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="tigher">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/tigher.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="elephant">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/elephent.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="elephant">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/elephent.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="kamal">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/kamal.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="kamal">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/kamal.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="horse">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/horse.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="horse">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/horse.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="fox">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/fox.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="fox">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/fox.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="cat">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/cat.JPG" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="cat">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/cat.JPG" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="cow">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/cow.jpg" alt="">
+        </div>
+    </div>
+    <div class="game-block" data-animale="cow">
+        <div class="face front"></div>
+        <div class="face back">
+            <img src="images/cow.jpg" alt="">
+        </div>
+    </div>
+</div>
+<div class="win" id="win">
+    <div class="firework"></div>
+    <div class="firework1"></div>
+    <div class="firework2"></div>
+    <div class="wrapper ten">
+        <div>
+            <h3 class="bounce">
+                <span>E</span>
+                <span>X</span>
+                <span>C</span>
+                <span>E</span>
+                <span>L</span>
+                <span>L</span>
+                <span>E</span>
+                <span>N</span>
+                <span>T</span>
+            </h3>
+        </div>
+    </div>
+<!-- 
+    <div class="wrapper three">
+        <video autoplay muted loop>
+            <source src="Video/firework.mp4" type="video/mp4">
+        </video>
+            <h2>EXCELLENT</h2>
+    </div> -->
+    <a class="btn-new" id="btn-new" href="index.html">New game</a>
+    </div>
+    <div class="lose" id="lose">
+        <div class="wrapper ten">
+            <div>
+                <h3 class="bounce">
+                    <span>G</span>
+                    <span>A</span>
+                    <span>M</span>
+                    <span>E</span>
+                    <span>_</span>
+                    <span>O</span>
+                    <span>V</span>
+                    <span>E</span>
+                    <span>R</span>
+                </h3>
+            </div>
+        </div>
+        <!-- <span class="game-over">😓GAME OVER😓</span> -->
+        <a class="btn-new" id="btn-new" href="index.html">New game</a>
+        </div>
+</body>
+<audio id="fail" src="audio/Error _ Sound Effects (No Copyright)(M4A_128K).m4a" preload="auto"></audio>
+<audio id="sucess" src="audio/صوت صح للمونتاج الكل يبحث عليه(M4A_128K).m4a" preload="auto"></audio>
+<audio id="win-audio" src="audio/تصفيق الجمهور مونتاج(MP3_128K).mp3" preload="auto"></audio>
+<audio id="failer" src="audio/صوت الفشل للمونتاج_ The sound of failure for editing(M4A_128K).m4a" preload="auto"></audio>
+<script src="js/custom.js"></script>
+</html>

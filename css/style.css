@@ -1,0 +1,438 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a072e;
+}
+
+a {
+  text-decoration: none;
+}
+
+.control-btn {
+  position: fixed;
+  background-color: rgba(22, 94, 153, 0.8);
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+.control-btn .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #cd434c;
+  padding: 15px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  color: #fff;
+  font-size: 20px;
+  transition: 0.3s;
+}
+.control-btn .btn:hover {
+  background-color: #048b06;
+}
+
+.info-container {
+  width: 88%;
+  margin: 20px auto 0;
+  background-color: #bcdaf2;
+  font-size: 20px;
+  padding: 20px;
+  border: 2px solid #2196f3;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+.info-container .name {
+  text-align: right;
+}
+.info-container #js-timer {
+  text-align: center;
+}
+
+.memory-game-blocks {
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  align-items: center;
+  justify-content: center;
+}
+.memory-game-blocks .game-block {
+  width: 18%;
+  height: 180px;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  margin: 0 10px 20px;
+}
+.memory-game-blocks .game-block .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border: 5px solid #2196F3;
+}
+.memory-game-blocks .game-block .front {
+  background-color: #333;
+  line-height: 180px;
+}
+.memory-game-blocks .game-block .front::before {
+  content: "🤔";
+  font-size: 80px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+.memory-game-blocks .game-block .back {
+  background-color: #607D8B;
+  transform: rotateY(180deg);
+}
+.memory-game-blocks .game-block .back img {
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
+  background-size: cover;
+}
+.memory-game-blocks .is-flib, .memory-game-blocks .has-match {
+  transform: rotateY(180deg);
+  pointer-events: none;
+}
+
+@media (max-width: 1112px) {
+  .memory-game-blocks {
+    display: flex;
+    width: 80%;
+    margin: 20px auto;
+    align-items: center;
+    justify-content: center;
+  }
+  .memory-game-blocks .game-block {
+    width: 150px;
+    height: 140px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    margin: 0 10px 20px;
+  }
+  .memory-game-blocks .game-block .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    border: 5px solid #2196F3;
+  }
+  .memory-game-blocks .game-block .front {
+    background-color: #333;
+    line-height: 140px;
+  }
+  .memory-game-blocks .game-block .front::before {
+    content: "🤔";
+    font-size: 80px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+  }
+  .memory-game-blocks .game-block .back {
+    background-color: #607D8B;
+    transform: rotateY(180deg);
+  }
+  .memory-game-blocks .game-block .back img {
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+    background-size: cover;
+  }
+  .memory-game-blocks .is-flib, .memory-game-blocks .has-match {
+    transform: rotateY(180deg);
+    pointer-events: none;
+  }
+}
+.no-clicking {
+  pointer-events: none;
+}
+
+.lose {
+  background: rgba(24, 40, 56, 0.938);
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+.lose .btn-new {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #5468ed;
+  padding: 15px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  color: #fff;
+  font-size: 20px;
+  transition: 0.3s;
+  z-index: 100;
+}
+.lose .btn-new:hover {
+  background-color: rgba(40, 55, 170, 0.8745098039);
+}
+.lose .wrapper.ten {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lose .bounce {
+  font-size: 7rem;
+  width: 100%;
+  margin: 3rem auto;
+  display: inline-flex;
+  justify-content: center;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(33, 30, 30, 0.1803921569));
+}
+.lose .bounce span {
+  display: inline-flex;
+  color: #c7f4ff;
+  font-family: "Play", sans-serif;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 50%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-20px);
+  }
+}
+.lose .ten span:nth-of-type(1) {
+  animation-delay: 0.1s;
+}
+.lose .ten span:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+.lose .ten span:nth-of-type(3) {
+  animation-delay: 0.3s;
+}
+.lose .ten span:nth-of-type(4) {
+  animation-delay: 0.4s;
+}
+.lose .ten span:nth-of-type(5) {
+  animation-delay: 0.5s;
+}
+.lose .ten span:nth-of-type(6) {
+  animation-delay: 0.6s;
+}
+.lose .ten span:nth-of-type(7) {
+  animation-delay: 0.7s;
+}
+.lose .ten span:nth-of-type(8) {
+  animation-delay: 0.8s;
+}
+.lose .ten span:nth-of-type(9) {
+  animation-delay: 0.9s;
+}
+
+.win {
+  background: rgba(24, 40, 56, 0.938);
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.win .wrapper.ten {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.win .bounce {
+  font-size: 7rem;
+  width: 100%;
+  margin: 3rem auto;
+  display: inline-flex;
+  justify-content: center;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(33, 30, 30, 0.1803921569));
+}
+.win .bounce span {
+  display: inline-flex;
+  color: #c7f4ff;
+  font-family: "Play", sans-serif;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 50%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-20px);
+  }
+}
+.win .ten span:nth-of-type(1) {
+  animation-delay: 0.1s;
+}
+.win .ten span:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+.win .ten span:nth-of-type(3) {
+  animation-delay: 0.3s;
+}
+.win .ten span:nth-of-type(4) {
+  animation-delay: 0.4s;
+}
+.win .ten span:nth-of-type(5) {
+  animation-delay: 0.5s;
+}
+.win .ten span:nth-of-type(6) {
+  animation-delay: 0.6s;
+}
+.win .ten span:nth-of-type(7) {
+  animation-delay: 0.7s;
+}
+.win .ten span:nth-of-type(8) {
+  animation-delay: 0.8s;
+}
+.win .ten span:nth-of-type(9) {
+  animation-delay: 0.9s;
+}
+@keyframes animatedOne {
+  from {
+    background-position: 50% 50%;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+.win .btn-new {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #5468ed;
+  padding: 15px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  color: #fff;
+  font-size: 20px;
+  transition: 0.3s;
+  z-index: 100;
+}
+.win .btn-new:hover {
+  background-color: rgba(40, 55, 170, 0.8745098039);
+}
+@keyframes firework {
+  0% {
+    transform: translate(-50%, 60vh);
+    width: 0.5vmin;
+    opacity: 1;
+  }
+  50% {
+    width: 0.5vmin;
+    opacity: 1;
+  }
+  100% {
+    width: 45vmin;
+    opacity: 0;
+  }
+}
+.win .firework,
+.win .firework::before,
+.win .firework::after {
+  --top: 60vh;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5vmin;
+  aspect-ratio: 1;
+  z-index: 10;
+  background: radial-gradient(circle, #ff0 0.2vmin, rgba(0, 0, 0, 0) 0) 50% 0%, radial-gradient(circle, #ff0 0.3vmin, rgba(0, 0, 0, 0) 0) 0% 50%, radial-gradient(circle, #ff0 0.5vmin, rgba(0, 0, 0, 0) 0) 50% 99%, radial-gradient(circle, #ff0 0.2vmin, rgba(0, 0, 0, 0) 0) 99% 50%, radial-gradient(circle, #ff0 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 90%, radial-gradient(circle, #ff0 0.5vmin, rgba(0, 0, 0, 0) 0) 95% 90%, radial-gradient(circle, #ff0 0.5vmin, rgba(0, 0, 0, 0) 0) 10% 60%, radial-gradient(circle, #ff0 0.2vmin, rgba(0, 0, 0, 0) 0) 31% 80%, radial-gradient(circle, #ff0 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 10%, radial-gradient(circle, #ff0 0.2vmin, rgba(0, 0, 0, 0) 0) 90% 23%, radial-gradient(circle, #ff0 0.3vmin, rgba(0, 0, 0, 0) 0) 45% 20%, radial-gradient(circle, #ff0 0.5vmin, rgba(0, 0, 0, 0) 0) 13% 24%;
+  background-size: 1vmin 1vmin;
+  background-repeat: no-repeat;
+  animation: firework 3s infinite;
+}
+.win .firework::before {
+  transform: translate(-50%, -50%) rotate(25deg) !important;
+}
+.win .firework::after {
+  transform: translate(-50%, -50%) rotate(-37deg) !important;
+}
+.win .firework1,
+.win .firework1::before,
+.win .firework1::after {
+  --top: 60vh;
+  content: "";
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 0.5vmin;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgb(235, 17, 17) 0.2vmin, rgba(0, 0, 0, 0) 0) 50% 0%, radial-gradient(circle, rgb(235, 17, 17) 0.3vmin, rgba(0, 0, 0, 0) 0) 0% 50%, radial-gradient(circle, rgb(235, 17, 17) 0.5vmin, rgba(0, 0, 0, 0) 0) 50% 99%, radial-gradient(circle, rgb(235, 17, 17) 0.2vmin, rgba(0, 0, 0, 0) 0) 99% 50%, radial-gradient(circle, rgb(235, 17, 17) 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 90%, radial-gradient(circle, rgb(235, 17, 17) 0.5vmin, rgba(0, 0, 0, 0) 0) 95% 90%, radial-gradient(circle, rgb(235, 17, 17) 0.5vmin, rgba(0, 0, 0, 0) 0) 10% 60%, radial-gradient(circle, rgb(235, 17, 17) 0.2vmin, rgba(0, 0, 0, 0) 0) 31% 80%, radial-gradient(circle, rgb(235, 17, 17) 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 10%, radial-gradient(circle, rgb(235, 17, 17) 0.2vmin, rgba(0, 0, 0, 0) 0) 90% 23%, radial-gradient(circle, rgb(235, 17, 17) 0.3vmin, rgba(0, 0, 0, 0) 0) 45% 20%, radial-gradient(circle, rgb(235, 17, 17) 0.5vmin, rgba(0, 0, 0, 0) 0) 13% 24%;
+  background-size: 1vmin 1vmin;
+  background-repeat: no-repeat;
+  animation: firework 3s infinite;
+}
+.win .firework1::before {
+  transform: translate(-50%, -50%) rotate(25deg) !important;
+}
+.win .firework1::after {
+  transform: translate(-50%, -50%) rotate(-37deg) !important;
+}
+.win .firework2,
+.win .firework2::before,
+.win .firework2:after {
+  --top: 60vh;
+  content: "";
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 0.5vmin;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgb(30, 216, 13) 0.2vmin, rgba(0, 0, 0, 0) 0) 50% 0%, radial-gradient(circle, rgb(30, 216, 13) 0.3vmin, rgba(0, 0, 0, 0) 0) 0% 50%, radial-gradient(circle, rgb(30, 216, 13) 0.5vmin, rgba(0, 0, 0, 0) 0) 50% 99%, radial-gradient(circle, rgb(30, 216, 13) 0.2vmin, rgba(0, 0, 0, 0) 0) 99% 50%, radial-gradient(circle, rgb(30, 216, 13) 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 90%, radial-gradient(circle, rgb(30, 216, 13) 0.5vmin, rgba(0, 0, 0, 0) 0) 95% 90%, radial-gradient(circle, rgb(30, 216, 13) 0.5vmin, rgba(0, 0, 0, 0) 0) 10% 60%, radial-gradient(circle, rgb(30, 216, 13) 0.2vmin, rgba(0, 0, 0, 0) 0) 31% 80%, radial-gradient(circle, rgb(30, 216, 13) 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 10%, radial-gradient(circle, rgb(30, 216, 13) 0.2vmin, rgba(0, 0, 0, 0) 0) 90% 23%, radial-gradient(circle, rgb(30, 216, 13) 0.3vmin, rgba(0, 0, 0, 0) 0) 45% 20%, radial-gradient(circle, rgb(30, 216, 13) 0.5vmin, rgba(0, 0, 0, 0) 0) 13% 24%;
+  background-size: 1vmin 1vmin;
+  background-repeat: no-repeat;
+  animation: firework 3s infinite;
+}
+.win .firework2::before {
+  transform: translate(-50%, -50%) rotate(25deg) !important;
+}
+.win .firework2::after {
+  transform: translate(-50%, -50%) rotate(-37deg) !important;
+}/*# sourceMappingURL=style.css.map */
